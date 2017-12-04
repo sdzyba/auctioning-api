@@ -4,7 +4,6 @@ module Auctions
   class Creator
     STEP_INITIAL             = 0
     STEP_LIMIT               = 5
-    PRICE_INITIAL_MULTIPLIER = 0.1
     PRICE_ROUND_PRECISION    = 2
     AUCTION_TIME_LENGTH      = 30.minutes
 
@@ -31,8 +30,8 @@ module Auctions
 
     def init_auction
       start_at      = find_start_at
-      end_at        = start_at + AUCTION_TIME_LENGTH                                  if start_at.present?
-      price_current = (price * PRICE_INITIAL_MULTIPLIER).round(PRICE_ROUND_PRECISION) if price.present?
+      end_at        = start_at + AUCTION_TIME_LENGTH                                         if start_at.present?
+      price_current = (price * Const::PRICE_INITIAL_MULTIPLIER).round(PRICE_ROUND_PRECISION) if price.present?
 
       Auction.create(
         price_current: price_current,

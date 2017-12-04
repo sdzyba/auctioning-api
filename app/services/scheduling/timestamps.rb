@@ -24,7 +24,7 @@ module Scheduling
       elsif days_diff > ONE_DAY && time_to.hour > DRIVERS_ACTIVE_FROM
         defer_time_from(days_diff.days)
       elsif days_diff > ONE_DAY
-        defer_time_from((days_diff - 1).days)
+        defer_time_from((days_diff - ONE_DAY).days)
       end
     end
 

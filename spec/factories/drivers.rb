@@ -10,6 +10,5 @@
 
 FactoryBot.define do
   factory :driver do
-    status "MyString"
   end
 end

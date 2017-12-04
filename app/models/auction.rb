@@ -67,8 +67,7 @@ class Auction < ApplicationRecord
   scope :scheduled, -> { where(status: SCHEDULED) }
 
   def next_step_at
-    return start_at + step_length if step_current.zero?
-    start_at + step_length * (step_current + 1)
+    start_at + step_length * step_current
   end
 
   private

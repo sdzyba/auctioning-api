@@ -14,6 +14,5 @@
 
 FactoryBot.define do
   factory :lock do
-    entity "MyString"
   end
 end

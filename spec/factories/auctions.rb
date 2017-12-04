@@ -24,10 +24,10 @@
 FactoryBot.define do
   factory :auction do
     price_limit { Faker::Number.decimal(8, 2) }
-    step_current 1
+    step_current 0
     step_limit 5
     status 'scheduled'
-    ride_at 2.hours.from_now
+    ride_at Time.parse("2017-12-04 15:00 UTC")
     start_at Time.parse("2017-12-04 12:30 UTC")
     end_at Time.parse("2017-12-04 13:00 UTC")
   end
