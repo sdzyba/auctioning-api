@@ -1,7 +1,8 @@
 module Api
   class AuctionsController < ApplicationController
     def index
-      render json: Auction.started, each_serializer: ::Api::Collections::AuctionSerializer
+      data = AuctionsQuery.new(type: :started).perform
+      render json: data, each_serializer: ::Api::Collections::AuctionSerializer
     end
 
     def update

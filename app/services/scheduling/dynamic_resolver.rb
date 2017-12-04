@@ -1,5 +1,5 @@
 # just an example, it's not used in application
-module Auctions
+module Scheduling
   class DynamicResolver
     attr_reader :ride_at, :start_at_limit, :current_time, :delay_step
     private     :ride_at, :start_at_limit, :current_time, :delay_step

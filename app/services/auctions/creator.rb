@@ -47,7 +47,7 @@ module Auctions
 
     def find_start_at
       return if ride_at.blank?
-      ::Lock.start_at.with_lock { Auctions::StartTimeResolver.new(ride_at).perform }
+      ::Lock.start_at.with_lock { Scheduling::Resolver.new(ride_at).perform }
     end
   end
 end
