@@ -8,10 +8,10 @@ module Scheduling
     end
 
     def perform
-      return Time.zone.at(time.time_middle_sec) if occupied_slots.empty?
+      return Time.zone.at(time.middle_sec) if occupied_slots.empty?
       result = start_at(
-        occupied_slots.select { |start_at| start_at >= time.time_middle_sec },
-        occupied_slots.select { |start_at| start_at <= time.time_middle_sec }
+        occupied_slots.select { |start_at| start_at >= time.middle_sec },
+        occupied_slots.select { |start_at| start_at <= time.middle_sec }
       )
       Time.zone.at(result)
     end
@@ -19,7 +19,7 @@ module Scheduling
     private
 
     def occupied_slots
-      @occupied_slots ||= AuctionsQuery.new(type: :slots, time_from: time.time_from, time_to: time.time_to).perform
+      @occupied_slots ||= AuctionsQuery.new(type: :slots, time_from: time.from, time_to: time.to).perform
     end
 
     def start_at(occupied_after, occupied_before, step_sec = Const::DEFAULT_STEP)
@@ -27,7 +27,7 @@ module Scheduling
       before = available_before(occupied_before, step_sec)
 
       if after && before
-        after - time.time_middle_sec < time.time_middle_sec - before ? after : before
+        after - time.middle_sec < time.middle_sec - before ? after : before
       elsif !(after || before)
         start_at(occupied_after, occupied_before, step_sec / Const::DEFAULT_DIVISION)
       else
@@ -36,12 +36,12 @@ module Scheduling
     end
 
     def available_after(occupied_after, step_sec)
-      all_after = slots(time.time_to_sec - time.time_middle_sec, step_sec, time.time_middle_sec)
+      all_after = slots(time.to_sec - time.middle_sec, step_sec, time.middle_sec)
       (all_after - occupied_after).first
     end
 
     def available_before(occupied_before, step_sec)
-      all_before = slots(time.time_middle_sec - time.time_from_sec, step_sec, time.time_from_sec)
+      all_before = slots(time.middle_sec - time.from_sec, step_sec, time.from_sec)
       (all_before - occupied_before).last
     end
 
