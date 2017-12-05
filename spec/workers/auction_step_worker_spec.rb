@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe PriceStepWorker, type: :worker do
+RSpec.describe AuctionStepWorker, type: :worker do
   describe "#perform" do
     subject { described_class.new.perform(auction.id) }
 
@@ -16,7 +16,7 @@ RSpec.describe PriceStepWorker, type: :worker do
       )
     end
 
-    before { allow(PriceStepWorker).to receive(:perform_at) }
+    before { allow(described_class).to receive(:perform_at) }
 
     context "when auction already assigned to a driver" do
       let(:step_current) { 1 }

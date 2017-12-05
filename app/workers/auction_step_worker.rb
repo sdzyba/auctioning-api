@@ -1,4 +1,4 @@
-class PriceStepWorker
+class AuctionStepWorker
   include Sidekiq::Worker
 
   def perform(auction_id)
@@ -9,7 +9,7 @@ class PriceStepWorker
       auction.finish!
     else
       update(auction)
-      PriceStepWorker.perform_at(auction.next_step_at, auction.id)
+      AuctionStepWorker.perform_at(auction.next_step_at, auction.id)
     end
   end
 
