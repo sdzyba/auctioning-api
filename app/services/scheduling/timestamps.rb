@@ -23,7 +23,7 @@ module Scheduling
     def middle_sec
       return @middle_sec if @middle_sec
       @middle_sec = from_sec + (to_sec - from_sec) / Const::DEFAULT_DIVISION
-      @middle_sec += middle_sec % Const::DEFAULT_STEP
+      @middle_sec += @middle_sec % Const::DEFAULT_STEP
     end
 
     private

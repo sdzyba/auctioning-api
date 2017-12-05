@@ -70,6 +70,17 @@ class Auction < ApplicationRecord
     start_at + step_length * step_current
   end
 
+  def ended?
+    step_current > step_limit
+  end
+
+  def next_price_update!
+    price_initial = price_limit * Const::PRICE_INITIAL_MULTIPLIER
+    price_increase = (price_limit - price_initial) * (step_current.to_f / step_limit)
+
+    update!(price_current: price_initial + price_increase, step_current: step_current + Const::STEP_INCREASE)
+  end
+
   private
 
   def step_length
