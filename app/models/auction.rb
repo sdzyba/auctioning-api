@@ -42,6 +42,7 @@ class Auction < ApplicationRecord
     end
 
     event :assign do
+      before { |driver_id| self.driver_id = driver_id }
       transitions from: :started, to: :assigned
     end
 
@@ -82,8 +83,7 @@ class Auction < ApplicationRecord
   end
 
   def assign_driver(driver_id)
-    self.driver_id = driver_id
-    assign
+    assign(driver_id)
     save!
   end
 

@@ -11,7 +11,6 @@ RSpec.describe Auctions::Assigner do
 
       it "assignes the auction only once" do
         described_class.new(auction, driver_1.id).perform
-
         expect(described_class.new(auction, driver_2.id).perform).to eq(errors: ["Already assigned"])
       end
     end
