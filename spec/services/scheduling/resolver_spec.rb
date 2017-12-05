@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Scheduling::Resolver do
   let(:current) { "2017-12-10 10:00 UTC" }
@@ -129,19 +129,19 @@ RSpec.describe Scheduling::Resolver do
       end
     end
 
-    describe 'active hours' do
+    describe "active hours" do
       let(:occupied_slots) { [] }
 
-      context 'when it is the same night' do
+      context "when it is the same night" do
         let(:ride_at) { Time.parse("2017-12-10 23:40:00 UTC") }
 
-        context 'when request came at morning' do
+        context "when request came at morning" do
           it "schedules on the same day" do
             expect(subject.perform).to eq(Time.parse("2017-12-10 16:20 UTC"))
           end
         end
 
-        context 'when request came at evening' do
+        context "when request came at evening" do
           let(:current) { "2017-12-10 21:00 UTC" }
 
           it "schedules on the same day" do
@@ -149,7 +149,7 @@ RSpec.describe Scheduling::Resolver do
           end
         end
 
-        context 'when request came at late evening' do
+        context "when request came at late evening" do
           let(:current) { "2017-12-10 22:10 UTC" }
 
           it "schedules on the same day" do
@@ -158,16 +158,16 @@ RSpec.describe Scheduling::Resolver do
         end
       end
 
-      context 'when it is the same day' do
+      context "when it is the same day" do
         let(:ride_at) { Time.parse("2017-12-10 20:40:00 UTC") }
 
-        context 'when request came at morning' do
+        context "when request came at morning" do
           it "schedules on the same day" do
             expect(subject.perform).to eq(Time.parse("2017-12-10 14:50 UTC"))
           end
         end
 
-        context 'when request came at evening' do
+        context "when request came at evening" do
           let(:current) { "2017-12-10 19:00 UTC" }
 
           it "schedules on the same day" do
@@ -176,16 +176,16 @@ RSpec.describe Scheduling::Resolver do
         end
       end
 
-      context 'when it is the next night' do
+      context "when it is the next night" do
         let(:ride_at) { Time.parse("2017-12-11 23:40:00 UTC") }
 
-        context 'when request came at morning' do
+        context "when request came at morning" do
           it "schedules on the next day on active hours" do
             expect(subject.perform).to eq(Time.parse("2017-12-11 15:00 UTC"))
           end
         end
 
-        context 'when request came at evening' do
+        context "when request came at evening" do
           let(:current) { "2017-12-10 21:00 UTC" }
 
           it "schedules on the next day starting on active hours" do
@@ -194,16 +194,16 @@ RSpec.describe Scheduling::Resolver do
         end
       end
 
-      context 'when it is the next day' do
+      context "when it is the next day" do
         let(:ride_at) { Time.parse("2017-12-11 15:00:00 UTC") }
 
-        context 'when request came at morning' do
+        context "when request came at morning" do
           it "schedules on the next day on active hours" do
             expect(subject.perform).to eq(Time.parse("2017-12-11 11:00 UTC"))
           end
         end
 
-        context 'when request came at evening' do
+        context "when request came at evening" do
           let(:current) { "2017-12-10 21:00 UTC" }
 
           it "schedules on the next day starting on active hours" do
@@ -212,16 +212,16 @@ RSpec.describe Scheduling::Resolver do
         end
       end
 
-      context 'when it is the day after tomorrow' do
+      context "when it is the day after tomorrow" do
         let(:ride_at) { Time.parse("2017-12-12 15:00:00 UTC") }
 
-        context 'when request came at morning' do
+        context "when request came at morning" do
           it "schedules on the day after tomorrow on active hours" do
             expect(subject.perform).to eq(Time.parse("2017-12-12 11:00 UTC"))
           end
         end
 
-        context 'when request came at evening' do
+        context "when request came at evening" do
           let(:current) { "2017-12-10 21:00 UTC" }
 
           it "schedules on the day after tomorrow starting on active hours" do

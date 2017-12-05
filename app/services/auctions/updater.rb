@@ -1,5 +1,3 @@
-require 'benchmark'
-
 module Auctions
   class Updater
     MESSAGE = "Already assigned".freeze

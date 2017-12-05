@@ -26,7 +26,7 @@ FactoryBot.define do
     price_limit { Faker::Number.decimal(8, 2) }
     step_current 0
     step_limit 5
-    status 'scheduled'
+    status "scheduled"
     ride_at Time.parse("2017-12-04 15:00 UTC")
     start_at Time.parse("2017-12-04 12:30 UTC")
     end_at Time.parse("2017-12-04 13:00 UTC")

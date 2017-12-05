@@ -19,13 +19,17 @@ module Scheduling
       days_diff = time_to.yday - time_from.yday
 
       if days_diff == ONE_DAY
-        defer_time_from(ONE_DAY.day) if time_to.hour > DRIVERS_ACTIVE_FROM
-        active_time_to               if time_to.hour >= DRIVERS_ACTIVE_TO
+        adjust_next_day
       elsif days_diff > ONE_DAY && time_to.hour > DRIVERS_ACTIVE_FROM
         defer_time_from(days_diff.days)
       elsif days_diff > ONE_DAY
         defer_time_from((days_diff - ONE_DAY).days)
       end
+    end
+
+    def adjust_next_day
+      defer_time_from(ONE_DAY.day) if time_to.hour > DRIVERS_ACTIVE_FROM
+      active_time_to               if time_to.hour >= DRIVERS_ACTIVE_TO
     end
 
     def load_timestamps

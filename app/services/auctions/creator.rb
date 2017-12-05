@@ -1,4 +1,4 @@
-require 'benchmark'
+require "benchmark"
 
 module Auctions
   class Creator
@@ -28,6 +28,7 @@ module Auctions
 
     private
 
+    # rubocop:disable Metrics/MethodLength
     def init_auction
       start_at      = find_start_at
       end_at        = start_at + AUCTION_TIME_LENGTH                                         if start_at.present?
@@ -43,6 +44,7 @@ module Auctions
         end_at:        end_at
       )
     end
+    # rubocop:enable Metrics/MethodLength
 
     def find_start_at
       return if ride_at.blank?

@@ -12,7 +12,7 @@
 #  index_locks_on_entity  (entity) UNIQUE
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Lock, type: :model do
 end

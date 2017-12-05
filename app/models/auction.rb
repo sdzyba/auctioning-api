@@ -23,11 +23,11 @@
 
 class Auction < ApplicationRecord
   STATUSES = [
-    SCHEDULED = "scheduled",
-    STARTED   = "started",
-    FINISHED  = "finished",
-    ASSIGNED  = "assigned",
-  ]
+    SCHEDULED = "scheduled".freeze,
+    STARTED   = "started".freeze,
+    FINISHED  = "finished".freeze,
+    ASSIGNED  = "assigned".freeze
+  ].freeze
 
   include AASM
 

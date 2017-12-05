@@ -1,0 +1,28 @@
+AllCops:
+  DisplayCopNames: true
+  Exclude:
+    - db/**/*
+    - bin/**/*
+    - app/services/scheduling/dynamic_resolver.rb
+
+Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
