@@ -22,8 +22,7 @@ class AuctionsQuery
   private
 
   def slots
-    Auction.scheduled
-           .where(start_at: options[:time_from]..options[:time_to])
+    Auction.where(start_at: options[:time_from]..options[:time_to])
            .order(:start_at)
            .pluck(:start_at)
            .map(&:to_i)

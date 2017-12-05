@@ -64,8 +64,7 @@ class Auction < ApplicationRecord
   validates :end_at,        presence: true
   validates :driver,        presence: true, if: :assigned?
 
-  scope :started,   -> { where(status: STARTED) }
-  scope :scheduled, -> { where(status: SCHEDULED) }
+  scope :started, -> { where(status: STARTED) }
 
   def next_step_at
     start_at + step_length * step_current
