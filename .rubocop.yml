@@ -3,7 +3,7 @@ AllCops:
   Exclude:
     - db/**/*
     - bin/**/*
-    - app/services/scheduling/dynamic_resolver.rb
+    - lib/dynamic_resolver.rb
 
 Documentation:
   Enabled: false

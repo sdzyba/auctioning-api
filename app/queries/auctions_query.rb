@@ -1,12 +1,11 @@
 class AuctionsQuery
-  SLOTS_WHERE   = "start_at >= ? AND start_at <= ?".freeze
   INVALID_PARAM = "Invalid query type".freeze
 
   attr_reader :options
   private     :options
 
-  def initialize(*args)
-    @options = args
+  def initialize(options)
+    @options = options
   end
 
   def perform
@@ -24,7 +23,7 @@ class AuctionsQuery
 
   def slots
     Auction.scheduled
-           .where(SLOTS_WHERE, options[:time_from], options[:time_to])
+           .where(start_at: options[:time_from]..options[:time_to])
            .order(:start_at)
            .pluck(:start_at)
            .map(&:to_i)

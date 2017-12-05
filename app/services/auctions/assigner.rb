@@ -1,6 +1,6 @@
 module Auctions
   class Assigner
-    ERROR = "Already assigned".freeze
+    ASSIGNED_ERROR = "Already assigned".freeze
 
     attr_reader :driver_id, :auction
     private     :driver_id, :auction
@@ -12,7 +12,7 @@ module Auctions
 
     def perform
       auction.with_lock do
-        return { errors: [ERROR] } if auction.assigned?
+        return { errors: [ASSIGNED_ERROR] } if auction.assigned?
         assign
       end
       result

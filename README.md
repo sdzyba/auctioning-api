@@ -16,6 +16,9 @@ StartAuctionWorker switches the auction status to _started_ so when drivers are 
 
 When driver wants to "pick up" and auction he sends a corresponding request. During this request processing we lock the auction record and assign it to driver. If there were multiple simultenious requests for the same auction, first one would be assigned and the rest of the requests would have an error response with "Already assigned" message.
 
+#### Possible alternatives
+- Dynamically change _start_at_ for each auction on every new auction arrival. A draft on how this could be implemented is [here](https://github.com/sdzyba/auctioning-api/blob/master/lib/dynamic_resolver.rb). Basically it's just selects all the slots, sorts them by priority (urgency) and reschedules them to be started as earlier as possible. While this solution sounds flexible, this flexibility brings another problems like not being able to "reschedule" anything in Sidekiq. So it'd either require some hacks to get it's working or just not to use Sidekiq at all and implement some separate listener process.
+- Do not schedule auctions in a "blind" way but measure the market load on each piece of a timeline. This might be achived by using some counters, I guess, like redis' counters, but I didn't dive into this solution enough.
 
 # Requirements
 

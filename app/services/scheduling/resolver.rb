@@ -46,7 +46,7 @@ module Scheduling
     end
 
     def slots(all_seconds, step_sec, begin_value)
-      (0..(all_seconds / step_sec)).map { |n| begin_value + n * step_sec }
+      (0..(all_seconds / step_sec)).map { |step| begin_value + step * step_sec }
     end
   end
 end
