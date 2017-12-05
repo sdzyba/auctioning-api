@@ -13,7 +13,7 @@ module Auctions
     def perform
       auction.with_lock do
         return { errors: [ASSIGNED_ERROR] } if auction.assigned?
-        assign
+        auction.assign_driver(driver_id)
       end
       result
     end
@@ -26,12 +26,6 @@ module Auctions
       else
         { errors: auction.errors.full_messages }
       end
-    end
-
-    def assign
-      auction.assign
-      auction.driver_id = driver_id
-      auction.save!
     end
   end
 end

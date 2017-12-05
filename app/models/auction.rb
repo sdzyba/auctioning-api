@@ -81,6 +81,12 @@ class Auction < ApplicationRecord
     update!(price_current: price_initial + price_increase, step_current: step_current + Const::STEP_INCREASE)
   end
 
+  def assign_driver(driver_id)
+    self.driver_id = driver_id
+    assign
+    save!
+  end
+
   private
 
   def step_length
