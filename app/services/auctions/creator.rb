@@ -1,5 +1,3 @@
-require "benchmark"
-
 module Auctions
   class Creator
     STEP_INITIAL             = 0
