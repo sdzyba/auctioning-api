@@ -14,8 +14,6 @@
 
 class Lock < ApplicationRecord
   START_AT = "start_at".freeze
-  ASSIGN   = "assign".freeze
 
   scope :start_at, -> { find_by(entity: START_AT) }
-  scope :assign,   -> { find_by(entity: ASSIGN) }
 end

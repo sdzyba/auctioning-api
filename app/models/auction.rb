@@ -31,7 +31,7 @@ class Auction < ApplicationRecord
 
   include AASM
 
-  aasm(:status) do
+  aasm(:status, whiny_transitions: false) do
     state :scheduled, initial: true
     state :started
     state :assigned

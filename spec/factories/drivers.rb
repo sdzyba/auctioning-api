@@ -10,5 +10,6 @@
 
 FactoryBot.define do
   factory :driver do
+    status :pending
   end
 end

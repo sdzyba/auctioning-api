@@ -1,5 +1,6 @@
 class AuctionsQuery
-  SLOTS_WHERE = "start_at >= ? AND start_at <= ?".freeze
+  SLOTS_WHERE   = "start_at >= ? AND start_at <= ?".freeze
+  INVALID_PARAM = "Invalid query type".freeze
 
   attr_reader :options
   private     :options
@@ -15,7 +16,7 @@ class AuctionsQuery
     when :started
       Auction.started
     else
-      [] # instead of returning empty array we can raise exception here
+      raise ArgumentError, INVALID_PARAM
     end
   end
 

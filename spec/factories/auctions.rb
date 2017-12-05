@@ -24,6 +24,7 @@
 FactoryBot.define do
   factory :auction do
     price_limit { Faker::Number.decimal(8, 2) }
+    price_current { Faker::Number.decimal(8, 2) }
     step_current 0
     step_limit 5
     status "scheduled"

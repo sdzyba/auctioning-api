@@ -161,6 +161,14 @@ RSpec.describe Scheduling::Resolver do
       context "when it is the same day" do
         let(:ride_at) { Time.parse("2017-12-10 20:40:00 UTC") }
 
+        context "when request came at early morning" do
+          let(:current) { "2017-12-10 04:00 UTC" }
+
+          it "schedules on the same day starting from active hour" do
+            expect(subject.perform).to eq(Time.parse("2017-12-10 13:50 UTC"))
+          end
+        end
+
         context "when request came at morning" do
           it "schedules on the same day" do
             expect(subject.perform).to eq(Time.parse("2017-12-10 14:50 UTC"))

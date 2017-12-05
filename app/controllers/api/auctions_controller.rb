@@ -6,7 +6,7 @@ module Api
     end
 
     def update
-      result = Auctions::Updater.new(resource, update_params[:driver_id]).perform
+      result = Auctions::Assigner.new(resource, update_params[:driver_id]).perform
 
       if result[:errors].present?
         render json: result[:errors], status: :gone
